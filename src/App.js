@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { useContext } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { DrizzleContext } from "@drizzle/react-plugin"
+import ReadString from './components/ReadString';
+import SetString from './components/SetString';
+
+
+function App(props) {
+
+ 
+  const drizzleData = useContext(DrizzleContext.Context)
+  // console.log("context", DrizzleContext)
+  
+
+
+  if (!drizzleData.initialized) return "Loading Drizzle...";
+  return <div className="App">
+  <h1 className="App-h1"> WM Pet Shop</h1>  
+  <SetString></SetString>   
+  <br/>
+
+  <ReadString></ReadString>
+  
+  </div>;
 }
 
 export default App;

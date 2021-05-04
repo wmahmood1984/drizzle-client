@@ -4,9 +4,30 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import { Drizzle } from "@drizzle/store";
+import ERC721 from "./contracts/ERC721.json";
+import { DrizzleContext } from "@drizzle/react-plugin"
+
+const options = {
+  contracts: [ERC721],
+  web3: {
+    fallback: {
+      type: "ws",
+      url: "ws://127.0.0.1:9545",
+    },
+  },
+};
+
+// setup drizzle
+const drizzle = new Drizzle(options);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DrizzleContext.Provider  drizzle ={drizzle}>
+    <App/>
+    </DrizzleContext.Provider>
+   
   </React.StrictMode>,
   document.getElementById('root')
 );
